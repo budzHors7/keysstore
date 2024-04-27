@@ -1,0 +1,17 @@
+# Cache
+_pycache_
+lib/_pycache_
+utils/_pycache_
+
+# Files
+*.keystore
+*.zip
+*.apks
+*.aab
+*.apk
+*.jar
+*.pyc
+
+/output
+/build/*.aab
+/lib/*.jar
