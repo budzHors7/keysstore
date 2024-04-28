@@ -11,6 +11,8 @@ def installAppToDevice():
     print("")
     print("Install App")
     print("")
+    print(Fore.RED + '\033[1m' + "Note:"+ Style.RESET_ALL + " make sure that USB Debugging on the device is on.")
+    print("")
     print("Select app to install: ")
     print("")
 
@@ -50,6 +52,7 @@ def installAppToDevice():
 
         appLocation = str(appFile["fileLocation"])
 
+    print("")
     command = "java -jar ./lib/bundletool.jar install-apks --apks=" + appLocation
 
     installApp = os.system(command)

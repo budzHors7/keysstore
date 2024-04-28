@@ -21,15 +21,19 @@ def newKeyStore():
 
     location = "./output/keys/"
 
+    print("")
     print("Creating a New Keystore for Android Build...")
     print("")
 
     if not path.exists("./output/keys/"):
         makedirs("./output/keys/")
 
+    print("")
     command = "keytool -genkey -v -keystore " + location + keyName + ".keystore -alias " + alias + " -keyalg RSA -keysize 2048 -validity " + validity
 
     rValue = os.system(command)
+
+    from app import Welcome
     
     if rValue == 0:
         print("")
@@ -38,12 +42,16 @@ def newKeyStore():
 
         input("Press Enter/Return to continue...")
 
-        from app import Welcome
         Welcome("")
 
     else:
         print("")
         print(Fore.RED + '\033[1m' + "Error: Keystore created unsuccessful" + Style.RESET_ALL)
         print("")
-        input("Press Enter/Return to retry...")
-        newKeyStore()
+        sel = input("Press r to retry or Enter/Return to quit: ")
+
+        if (sel == "r"):
+            newKeyStore()
+        
+        else:
+            Welcome("")
