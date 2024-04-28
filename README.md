@@ -30,4 +30,6 @@ Install python requirements
 
 To run the program
 
+> Make sure you've downloaded [Bundletool](https://github.com/google/bundletool/releases), rename the file to bundletool.jar & insert the file in the **lib** folder.
+
     python app.py
