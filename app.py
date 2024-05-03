@@ -7,18 +7,18 @@ from utils.createNewKeyStore import newKeyStore
 from utils.signApp import signYourApp
 from utils.installApp import installAppToDevice
 from utils.checkRequirements import checkPackages
+from utils.validationInput import InputValidation
 
 def Welcome(error: str):
     resetWindow()
 
-    print(Fore.GREEN + '\033[1m' + "KeysStore v1.0.0")
+    print(Fore.GREEN + '\033[1m' + "KeysStore v1.1.0")
     print(Fore.GREEN + '\033[1m' + "\nOpen Source Tool for creating Android KeyStore, Sign your \nApp with your keystore & Install your Android Build without \nusing Android Studio.")
     print(Style.RESET_ALL)
 
-    print("Created by " + '\033[1m' + Fore.BLUE + "budzHors7 (https://github.com/budzHors7)")
-    print(Style.RESET_ALL)
+    print("Created by " + '\033[1m' + Fore.BLUE + "budzHors7 (https://github.com/budzHors7)" + Style.RESET_ALL)
 
-    print("Select option(s) below to continue")
+    print("\nSelect option(s) below to continue")
 
     if error != "":
         print("")
@@ -36,16 +36,25 @@ def Welcome(error: str):
     print("=================================================================")
     print("")
 
-    selection = int(input("Select Menu : "))
+    selection = str(input("Select Menu : "))
+
+    wrongValidation = InputValidation(selection)
+
+    isValidated = wrongValidation.IsNumberOnly()
+
+    if (isValidated == False):
+        Welcome(Fore.RED + "Wrong Selection, only 1-5 available as options." + Style.RESET_ALL)
+
+    selection = int(selection)
 
     if selection == 1:
-        newKeyStore()
+        newKeyStore("")
 
     elif selection == 2:
-        signYourApp()
+        signYourApp("")
 
     elif selection == 3:
-        installAppToDevice()
+        installAppToDevice("")
 
     elif selection == 4:
         checkPackages()
@@ -55,6 +64,6 @@ def Welcome(error: str):
         exit()
     
     else:
-        Welcome("Wrong Selection, only 1-4 available as options.")
+        Welcome("Wrong Selection, only 1-5 available as options.")
 
 Welcome("")

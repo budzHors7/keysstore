@@ -1,10 +1,11 @@
 import os
-from os import path, listdir
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
+from utils.filesInfo import FileInfo
+from utils.validationInput import InputValidation
 
-def installAppToDevice():
+def installAppToDevice(error: str):
     resetWindow()
 
     print("========================== " + Fore.YELLOW + '\033[1m' + "Install" + Style.RESET_ALL + " ==========================")
@@ -12,38 +13,27 @@ def installAppToDevice():
     print("Install App")
     print("")
     print(Fore.RED + '\033[1m' + "Note:"+ Style.RESET_ALL + " make sure that USB Debugging on the device is on.")
-    print("")
+
+    if error != "":
+        print("")
+        print(error)
+
     print("Select app to install: ")
     print("")
 
-    appNo = 0
+    builds = FileInfo("./output/signed", ".apks")
+    appResults = builds.ListFiles()
 
-    appObject = {
-        "id": "",
-        "fileName": "",
-        "fileLocation": ""
-    }
+    appSelection = input("Select app: ")
 
-    appResults = [appObject]
-    appResults.clear()
+    wrongValidation = InputValidation(str(appSelection))
 
-    for appsFile in listdir("./output/signed"):
-        if appsFile.endswith(".apks"):
-            appNo = appNo + 1
-            print(path.join(str(appNo) + ": " + Fore.GREEN + '\033[1m' + appsFile + Style.RESET_ALL))
-            print("")
+    isValidated = wrongValidation.IsNumberOnly()
 
-            appObject = {
-                "id": str(appNo),
-                "fileName": str(path.join(appsFile)),
-                "fileLocation": str(path.join("./output/signed", appsFile))
-            }
-
-            appResults.append(appObject)
-
-    appSelection = int(input("Select your key: "))
+    if (isValidated == False):
+        installAppToDevice(Fore.RED + "Only number allowed.\n" + Style.RESET_ALL)
     
-    correctAppSelection = appSelection - 1
+    correctAppSelection = int(appSelection) - 1
 
     appLocation = ""
 
@@ -73,7 +63,7 @@ def installAppToDevice():
         sel = input("Press r to retry or Enter/Return to quit: ")
 
         if (sel == "r"):
-            installAppToDevice()
+            installAppToDevice("")
         
         else:
             Welcome("")

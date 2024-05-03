@@ -1,10 +1,12 @@
 import os
-from os import path, makedirs, listdir
+from os import path, makedirs
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
+from utils.filesInfo import FileInfo
+from utils.validationInput import InputValidation
 
-def signYourApp():
+def signYourApp(error: str):
     resetWindow()
 
     print("========================== " + Fore.YELLOW + '\033[1m' + "Sign App Build" + Style.RESET_ALL + " ==========================")
@@ -18,67 +20,41 @@ def signYourApp():
     if not path.exists("./output/keys"):
         makedirs("./output/keys")
 
+    if error != "":
+        print("")
+        print(error)
+
     print("List of build: ")
     print("")
 
-    buildNo = 0
+    builds = FileInfo("./builds", ".aab")
+    buildsResults = builds.ListFiles()
 
-    buildObject = {
-        "id": "",
-        "fileName": "",
-        "fileLocation": ""
-    }
-
-    buildsResults = [buildObject]
-    buildsResults.clear()
-
-    for buildsFile in listdir("./builds"):
-        if buildsFile.endswith(".aab"):
-            buildNo = buildNo + 1
-            print(path.join(str(buildNo) + ": " + Fore.GREEN + '\033[1m' + buildsFile + Style.RESET_ALL))
-            print("")
-
-            buildObject = {
-                "id": str(buildNo),
-                "fileName": str(path.join(buildsFile)),
-                "fileLocation": str(path.join("./builds", buildsFile))
-            }
-
-            buildsResults.append(buildObject)
-
-    buildSelection = int(input("Select Build: "))
+    buildSelection = input("Select Build: ")
     print("")
 
-    keysNo = 0
+    wrongValidation = InputValidation(str(buildSelection))
 
-    keysObject = {
-        "id": "",
-        "fileName": "",
-        "fileLocation": ""
-    }
+    isValidated = wrongValidation.IsNumberOnly()
 
-    keysResults = [keysObject]
-    keysResults.clear()
+    if (isValidated == False):
+        signYourApp(Fore.RED + "Only number allowed.\n" + Style.RESET_ALL)
 
-    for keysFile in listdir("./output/keys"):
-        if keysFile.endswith(".keystore"):
-            keysNo = keysNo + 1
-            print(path.join(str(keysNo) + ": " + Fore.GREEN + '\033[1m' + keysFile + Style.RESET_ALL))
-            print("")
+    keys = FileInfo("./output/keys", ".keystore")
+    keysResults = keys.ListFiles()
 
-            keysObject = {
-                "id": str(keysNo),
-                "fileName": str(path.join(keysFile)),
-                "fileLocation": str(path.join("./output/keys", keysFile))
-            }
-
-            keysResults.append(keysObject)
-
-    keySelection = int(input("Select your key: "))
+    keySelection = input("Select your key: ")
     print("")
 
-    correctBuildSelection = buildSelection - 1
-    correctKeySelection = keySelection - 1
+    wrongValidation = InputValidation(str(keySelection))
+
+    isValidated = wrongValidation.IsNumberOnly()
+
+    if (isValidated == False):
+        signYourApp(Fore.RED + "Only number allowed.\n" + Style.RESET_ALL)
+
+    correctBuildSelection = int(buildSelection) - 1
+    correctKeySelection = int(keySelection) - 1
 
     buildLocation = ""
     keyLocation = ""
@@ -98,11 +74,32 @@ def signYourApp():
     buildName = input("Enter name for signed new build (*.apks): ")
     print("")
 
+    wrongValidation = InputValidation(buildName)
+
+    isValidated = wrongValidation.IsTextWithNumbers()
+
+    if (isValidated == False):
+        signYourApp(Fore.RED + "Only number (0-9) & Alphabet characters (a-z/A-Z) allowed.\n" + Style.RESET_ALL)
+
     keyAliasName = input("Enter alias name for your key -> (" + keyName + "): ")
     print("")
 
+    wrongValidation = InputValidation(keyAliasName)
+
+    isValidated = wrongValidation.IsTextOnly()
+
+    if (isValidated == False):
+        signYourApp(Fore.RED + "Alphabet characters (a-z/A-Z) allowed.\n" + Style.RESET_ALL)
+
     keyAliasPass = input("Enter password for alias key -> (" + keyName + "): ")
     print("")
+
+    wrongValidation = InputValidation(keyAliasPass)
+
+    isValidated = wrongValidation.IsTextWithNumbers()
+
+    if (isValidated == False):
+        signYourApp(Fore.RED + "Only number (0-9) & Alphabet characters (a-z/A-Z) allowed.\n" + Style.RESET_ALL)
 
     command = "java -jar ./lib/bundletool.jar build-apks --bundle=" + buildLocation + " --output=./output/signed/" + buildName + ".apks --ks=" + keyLocation + " --ks-pass=pass:" + keyAliasPass + " --ks-key-alias=" + keyAliasName
 
@@ -124,7 +121,7 @@ def signYourApp():
         sel = input("Press r to retry or Enter/Return to quit")
 
         if (sel == "r"):
-            signYourApp()
+            signYourApp("")
         
         else:
             Welcome("")
