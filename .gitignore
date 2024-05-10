@@ -12,6 +12,9 @@ utils/_pycache_
 *.jar
 *.pyc
 
+# Mac OS
+.DS_Store
+
 /output
 /build/*.aab
 /lib/*.jar

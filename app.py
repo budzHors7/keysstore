@@ -1,4 +1,3 @@
-import os
 from sys import exit
 from colorama import Fore, Style
 
@@ -60,7 +59,7 @@ def Welcome(error: str):
         checkPackages()
 
     elif selection == 5:
-        os.system('cls')
+        resetWindow()
         exit()
     
     else:
