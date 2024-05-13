@@ -1,7 +1,9 @@
 # Cache
 _pycache_
+.pytest_cache
 lib/_pycache_
 utils/_pycache_
+utils/.pytest_cache
 
 # Files
 *.keystore

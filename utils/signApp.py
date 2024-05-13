@@ -96,7 +96,7 @@ def signYourApp(error: str):
 
     wrongValidation = InputValidation(keyAliasPass)
 
-    isValidated = wrongValidation.IsTextWithNumbers()
+    isValidated = wrongValidation.IsPassword()
 
     if (isValidated == False):
         signYourApp(Fore.RED + "Only number (0-9) & Alphabet characters (a-z/A-Z) allowed.\n" + Style.RESET_ALL)

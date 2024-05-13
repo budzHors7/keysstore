@@ -12,6 +12,11 @@ class InputValidation():
 
         return set(self.userInput).issubset(set(allowed_chars))
     
+    def IsPassword(self) -> bool:
+        allowed_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_@!#$%&'
+
+        return set(self.userInput).issubset(set(allowed_chars))
+    
     def IsNumberOnly(self) -> bool:
         allowed_chars = '1234567890'
 
