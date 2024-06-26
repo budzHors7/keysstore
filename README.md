@@ -2,6 +2,8 @@
 
 Open Source Tool for creating **Android KeyStore**, **Sign your App Build** with your keystore & **Install your Android Build** without using **Android Studio** on your device.
 
+![app](/assets/app.png)
+
 ## Fixtures
 
 - Generate new Android Keystore (*.keystore)
@@ -26,10 +28,22 @@ Open project directory
 
 Install python requirements
 
+***Windows***
+
     pip install -r requirements.txt
+
+***MacOS***
+
+    pip3 install -r requirements.txt
 
 To run the program
 
 > Make sure you've downloaded [Bundletool](https://github.com/google/bundletool/releases), rename the file to bundletool.jar & insert the file in the **lib** folder.
 
+***Windows***
+
     python app.py
+
+***MacOS***
+
+    python3 app.py
