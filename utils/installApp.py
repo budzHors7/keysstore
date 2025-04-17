@@ -1,4 +1,4 @@
-import os
+from os import system
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
@@ -45,7 +45,7 @@ def installAppToDevice(error: str):
     print("")
     command = "java -jar ./lib/bundletool.jar install-apks --apks=" + appLocation
 
-    installApp = os.system(command)
+    installApp = system(command)
 
     from app import Welcome
 

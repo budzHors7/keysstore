@@ -1,1 +1,0 @@
-Download the Bundletool and place it in this folder & rename the file to 'bundletool.jar'.

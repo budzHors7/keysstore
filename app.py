@@ -11,7 +11,7 @@ from utils.validationInput import InputValidation
 def Welcome(error: str):
     resetWindow()
 
-    print(Fore.GREEN + '\033[1m' + "KeysStore v1.1.0")
+    print(Fore.GREEN + '\033[1m' + "KeysStore v2.0.2")
     print(Fore.GREEN + '\033[1m' + "\nOpen Source Tool for creating Android KeyStore, Sign your \nApp with your keystore & Install your Android Build without \nusing Android Studio.")
     print(Style.RESET_ALL)
 
@@ -65,4 +65,5 @@ def Welcome(error: str):
     else:
         Welcome("Wrong Selection, only 1-5 available as options.")
 
-Welcome("")
+if __name__ == "__main__":
+    Welcome("")

@@ -1,5 +1,4 @@
-import os
-from os import path, makedirs
+from os import path, makedirs, system
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
@@ -103,7 +102,7 @@ def signYourApp(error: str):
 
     command = "java -jar ./lib/bundletool.jar build-apks --bundle=" + buildLocation + " --output=./output/signed/" + buildName + ".apks --ks=" + keyLocation + " --ks-pass=pass:" + keyAliasPass + " --ks-key-alias=" + keyAliasName
 
-    generateNewSignedCommand = os.system(command)
+    generateNewSignedCommand = system(command)
 
     from app import Welcome
 

@@ -38,7 +38,8 @@ Install python requirements
 
 To run the program
 
-> Make sure you've downloaded [Bundletool](https://github.com/google/bundletool/releases), rename the file to bundletool.jar & insert the file in the **lib** folder.
+> Make sure you've downloaded [Bundletool](https://github.com/google/bundletool/releases). Select option 4 (**check requirements**) to check if the bundletool is already downloaded or manually check the **lib** folder if the bundletool exist.
+> If it does not exist, select the **"Download Bundletool"** to download the latest bundletool available.
 
 ***Windows***
 

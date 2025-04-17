@@ -1,8 +1,11 @@
 # Cache
 _pycache_
+__pycache__
 .pytest_cache
 lib/_pycache_
+lib/__pycache__
 utils/_pycache_
+utils/__pycache__
 utils/.pytest_cache
 
 # Files
@@ -17,6 +20,7 @@ utils/.pytest_cache
 # Mac OS
 .DS_Store
 
+/lib
 /output
 /build/*.aab
 /lib/*.jar

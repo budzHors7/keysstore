@@ -1,5 +1,4 @@
-import os
-from os import path, makedirs
+from os import path, makedirs, system
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
@@ -57,7 +56,7 @@ def newKeyStore(error: str):
     print("")
     command = "keytool -genkey -v -keystore ./output/keys/" + keyName + ".keystore -alias " + alias + " -keyalg RSA -keysize 2048 -validity " + validity
 
-    rValue = os.system(command)
+    rValue = system(command)
 
     from app import Welcome
     
