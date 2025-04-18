@@ -1,5 +1,6 @@
-from os import path, makedirs, system
+from os import path, makedirs
 from colorama import Fore, Style
+from subprocess import call
 
 from utils.clearWindow import resetWindow
 from utils.validationInput import InputValidation
@@ -54,9 +55,23 @@ def newKeyStore(error: str):
         makedirs("./output/keys/")
 
     print("")
-    command = "keytool -genkey -v -keystore ./output/keys/" + keyName + ".keystore -alias " + alias + " -keyalg RSA -keysize 2048 -validity " + validity
+    command = [
+        "keytool",
+        "-genkey",
+        "-v",
+        "-keystore",
+        f"./output/keys/{keyName}.keystore",
+        "-alias",
+        alias,
+        "-keyalg",
+        "RSA",
+        "-keysize",
+        "2048",
+        "-validity",
+        validity
+    ]
 
-    rValue = system(command)
+    rValue = call(command)
 
     from app import Welcome
     

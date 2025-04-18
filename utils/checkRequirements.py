@@ -1,4 +1,5 @@
-import os
+from os import path, makedirs
+from subprocess import call
 import requests
 import time
 from datetime import timedelta
@@ -13,8 +14,8 @@ def download_bundletool():
     print("")
     
     # Create lib directory if it doesn't exist
-    if not os.path.exists("./lib"):
-        os.makedirs("./lib")
+    if not path.exists("./lib"):
+        makedirs("./lib")
     
     # Get latest release info from GitHub API
     print("Fetching latest release information...")
@@ -96,8 +97,8 @@ def download_bundletool():
         print(Fore.GREEN + f"Download complete! Saved to {output_file_path}" + Style.RESET_ALL)
         
         # Verify download
-        if os.path.exists(output_file_path):
-            downloaded_size = os.path.getsize(output_file_path)
+        if path.exists(output_file_path):
+            downloaded_size = path.getsize(output_file_path)
             if downloaded_size == file_size_bytes:
                 print(Fore.GREEN + "\nFile verification successful!" + Style.RESET_ALL)
                 input("\nPress Enter/Return to continue...")
@@ -128,7 +129,7 @@ def checkPackages():
     print('\033[1m' + "1: Java")
     print("")
 
-    javaCommand = os.system("java --version")
+    javaCommand = call(["java", "--version"])
     
     if (javaCommand < 1):
         print(Fore.GREEN + "\nFound" + Style.RESET_ALL)
@@ -141,7 +142,7 @@ def checkPackages():
     print('\033[1m' + "2: Adb - Android Debug Bridge")
     print("")
 
-    adbCommand = os.system("adb --version")
+    adbCommand = call(["adb", "--version"])
     
     if (adbCommand < 1):
         print(Fore.GREEN + "\nFound" + Style.RESET_ALL)
@@ -155,13 +156,13 @@ def checkPackages():
     print("")
 
     # Check if lib directory exists
-    if not os.path.exists("./lib"):
-        os.makedirs("./lib")
+    if not path.exists("./lib"):
+        makedirs("./lib")
 
-    bundletool_exists = os.path.exists("./lib/bundletool.jar")
+    bundletool_exists = path.exists("./lib/bundletool.jar")
     
     if bundletool_exists:
-        bundletoolCommand = os.system("java -jar ./lib/bundletool.jar version")
+        bundletoolCommand = call(["java", "-jar", "./lib/bundletool.jar", "version"])
         
         if (bundletoolCommand < 1):
             print(Fore.GREEN + "\nFound" + Style.RESET_ALL)

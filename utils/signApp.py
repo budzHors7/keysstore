@@ -1,4 +1,5 @@
-from os import path, makedirs, system
+from os import path, makedirs
+from subprocess import call
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
@@ -100,9 +101,19 @@ def signYourApp(error: str):
     if (isValidated == False):
         signYourApp(Fore.RED + "Only number (0-9) & Alphabet characters (a-z/A-Z) allowed.\n" + Style.RESET_ALL)
 
-    command = "java -jar ./lib/bundletool.jar build-apks --bundle=" + buildLocation + " --output=./output/signed/" + buildName + ".apks --ks=" + keyLocation + " --ks-pass=pass:" + keyAliasPass + " --ks-key-alias=" + keyAliasName
+    command = [
+        "java",
+        "-jar",
+        "./lib/bundletool.jar",
+        "build-apks",
+        f"--bundle={buildLocation}",
+        f" --output=./output/signed/{buildName}.apks",
+        f"--ks={keyLocation}",
+        f"--ks-pass=pass:{keyAliasPass}",
+        f"--ks-key-alias={keyAliasName}"
+    ]
 
-    generateNewSignedCommand = system(command)
+    generateNewSignedCommand = call(command)
 
     from app import Welcome
 

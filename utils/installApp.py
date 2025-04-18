@@ -1,4 +1,4 @@
-from os import system
+from subprocess import call
 from colorama import Fore, Style
 
 from utils.clearWindow import resetWindow
@@ -43,9 +43,15 @@ def installAppToDevice(error: str):
         appLocation = str(appFile["fileLocation"])
 
     print("")
-    command = "java -jar ./lib/bundletool.jar install-apks --apks=" + appLocation
+    command = [
+        "java",
+        "-jar",
+        "./lib/bundletool.jar",
+        "install-apks",
+        f"--apks={appLocation}"
+    ]
 
-    installApp = system(command)
+    installApp = call(command)
 
     from app import Welcome
 
