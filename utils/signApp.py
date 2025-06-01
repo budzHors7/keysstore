@@ -107,7 +107,7 @@ def signYourApp(error: str):
         "./lib/bundletool.jar",
         "build-apks",
         f"--bundle={buildLocation}",
-        f" --output=./output/signed/{buildName}.apks",
+        f"--output=./output/signed/{buildName}.apks",
         f"--ks={keyLocation}",
         f"--ks-pass=pass:{keyAliasPass}",
         f"--ks-key-alias={keyAliasName}"

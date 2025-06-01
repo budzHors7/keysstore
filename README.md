@@ -20,7 +20,7 @@ Open Source Tool for creating **Android KeyStore**, **Sign your App Build** with
 
 ## How to install?
 
-    git clone https://github.com/budzhors7/keysstore
+    git clone https://github.com/budzHors7/keysstore.git
 
 Open project directory
 
